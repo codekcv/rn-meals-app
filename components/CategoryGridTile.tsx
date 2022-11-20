@@ -3,9 +3,10 @@ import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
 type Props = {
   title: string;
   color: string;
+  onPress: () => void;
 };
 
-export default function CategoryGridTile({ title, color }: Props) {
+export default function CategoryGridTile({ title, color, onPress }: Props) {
   return (
     <View style={styles.container}>
       <Pressable
@@ -14,6 +15,7 @@ export default function CategoryGridTile({ title, color }: Props) {
           styles.pressable,
           pressed ? styles.pressed : null,
         ]}
+        onPress={onPress}
       >
         <View style={[styles.innerContainer, { backgroundColor: color }]}>
           <Text style={styles.title}>{title}</Text>
