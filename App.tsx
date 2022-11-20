@@ -2,6 +2,9 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar, StyleSheet } from "react-native";
 import CategoriesScreen from "./screens/CategoriesScreen";
+import MealDetailsScreen, {
+  MealDetailsScreenProps,
+} from "./screens/MealDetailsScreen";
 import MealsOverviewScreen, {
   MealsOverviewScreenProps,
 } from "./screens/MealsOverviewScreen";
@@ -9,6 +12,7 @@ import MealsOverviewScreen, {
 export type RootStackParamList = {
   MealsCategories: undefined;
   MealsOverview: MealsOverviewScreenProps;
+  MealDetails: MealDetailsScreenProps;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -39,6 +43,12 @@ export default function App() {
             name="MealsOverview"
             component={MealsOverviewScreen}
             options={{ title: "All Meals" }}
+            // options={({route, navigation}) => ({title: route.name})}
+          />
+          <Stack.Screen
+            name="MealDetails"
+            component={MealDetailsScreen}
+            options={{ title: "Meal Details" }}
           />
         </Stack.Navigator>
       </NavigationContainer>
