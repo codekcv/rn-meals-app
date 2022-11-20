@@ -1,6 +1,9 @@
 import { Image, Pressable, StyleSheet, Text, View } from "react-native";
+import { RootStackParamList } from "../App";
 import Meal from "../models/meal";
 import { crossPlatformStyles } from "../utils/shadows";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "@react-navigation/native";
 
 type Props = {
   data: Meal;
@@ -9,11 +12,19 @@ type Props = {
 export default function MealItem({ data }: Props) {
   const { title, imageUrl, duration, complexity, affordability } = data;
 
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  function handleNavigateToMealDetails() {
+    navigation.navigate("MealDetails", { data });
+  }
+
   return (
     <View style={styles.container}>
       <Pressable
         style={({ pressed }) => (pressed ? styles.pressed : null)}
         android_ripple={{ color: "#ccc" }}
+        onPress={handleNavigateToMealDetails}
       >
         <View style={styles.innerContainer}>
           <View>

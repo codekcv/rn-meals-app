@@ -1,16 +1,26 @@
 import { FlatList, StyleSheet, Text, View } from "react-native";
 import { RootStackParamList } from "../App";
-import { useRoute, RouteProp } from "@react-navigation/native";
-import { MEALS } from "../data/dummy-data";
+import { useRoute, useNavigation, RouteProp } from "@react-navigation/native";
+import { CATEGORIES, MEALS } from "../data/dummy-data";
 import MealItem from "../components/MealItem";
+import { useLayoutEffect } from "react";
 
 export type MealsOverviewScreenProps = {
   categoryId: string;
 };
 
 export default function MealsOverviewScreen() {
+  const navigation = useNavigation();
   const { params } = useRoute<RouteProp<RootStackParamList, "MealsOverview">>();
   const { categoryId } = params;
+
+  useLayoutEffect(() => {
+    const categoryTitle = CATEGORIES.find(
+      (category) => category.id === categoryId
+    )?.title;
+
+    navigation.setOptions({ title: categoryTitle });
+  }, []);
 
   const displayedMeals = MEALS.filter((meal) =>
     meal.categoryIds.includes(categoryId)
