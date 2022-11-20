@@ -2,9 +2,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar, StyleSheet } from "react-native";
 import CategoriesScreen from "./screens/CategoriesScreen";
-import MealsOverviewScreen from "./screens/MealsOverviewScreen";
+import MealsOverviewScreen, {
+  MealsOverviewScreenProps,
+} from "./screens/MealsOverviewScreen";
 
-const Stack = createNativeStackNavigator();
+export type RootStackParamList = {
+  MealsCategories: undefined;
+  MealsOverview: MealsOverviewScreenProps;
+};
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function App() {
   return (

@@ -1,12 +1,23 @@
 import { Platform, Pressable, StyleSheet, Text, View } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import Category from "../models/category";
+import { RootStackParamList } from "../App";
 
 type Props = {
-  title: string;
-  color: string;
-  onPress: () => void;
+  item: Category;
 };
 
-export default function CategoryGridTile({ title, color, onPress }: Props) {
+export default function CategoryGridTile({ item }: Props) {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
+  const { title, color, id } = item;
+
+  function handleNavigate() {
+    navigation.navigate("MealsOverview", { categoryId: id });
+  }
+
   return (
     <View style={styles.container}>
       <Pressable
@@ -15,7 +26,7 @@ export default function CategoryGridTile({ title, color, onPress }: Props) {
           styles.pressable,
           pressed ? styles.pressed : null,
         ]}
-        onPress={onPress}
+        onPress={handleNavigate}
       >
         <View style={[styles.innerContainer, { backgroundColor: color }]}>
           <Text style={styles.title}>{title}</Text>
