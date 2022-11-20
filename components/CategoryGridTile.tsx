@@ -3,6 +3,7 @@ import { useNavigation } from "@react-navigation/native";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import Category from "../models/category";
 import { RootStackParamList } from "../App";
+import { crossPlatformStyles } from "../utils/shadows";
 
 type Props = {
   item: Category;
@@ -42,15 +43,7 @@ const styles = StyleSheet.create({
     margin: 16,
     height: 150,
     borderRadius: 8,
-    overflow: Platform.select({ android: "hidden", ios: "visible" }),
-    // Android Shadow
-    elevation: 4,
-    // iOS Shadow
-    backgroundColor: "white",
-    shadowColor: "black",
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 2 },
+    ...crossPlatformStyles.shadow,
   },
   pressable: {
     flex: 1,
